@@ -6,6 +6,9 @@ document.addEventListener("DOMContentLoaded", function () {
   if (signupBtn) signupBtn.addEventListener("click", signupUser);
 });
 
+// ✅ Live backend base URL
+const BASE_URL = "https://grocery-back-end.onrender.com/dj-rest-auth";
+
 // Signup Function
 function signupUser() {
   const username = document.getElementById("signupUsername").value;
@@ -15,13 +18,12 @@ function signupUser() {
   const result = document.getElementById("result");
 
   const xhr = new XMLHttpRequest();
-  xhr.open("POST", "http://127.0.0.1:8000/api/auth/registration/", true);
+  xhr.open("POST", `${BASE_URL}/registration/`, true);
   xhr.setRequestHeader("Content-Type", "application/json");
 
   xhr.onreadystatechange = function () {
     if (xhr.readyState === 4) {
       if (xhr.status === 201) {
-        // If the backend returns a token, extract and store it
         try {
           const response = JSON.parse(xhr.responseText);
           if (response.key) {
@@ -65,18 +67,18 @@ function loginUser(event) {
   const result = document.getElementById("result");
 
   const xhr = new XMLHttpRequest();
-  xhr.open("POST", "http://127.0.0.1:8000/api/auth/login/", true);
+  xhr.open("POST", `${BASE_URL}/login/`, true);
   xhr.setRequestHeader("Content-Type", "application/json");
 
   xhr.onreadystatechange = function () {
     if (xhr.readyState === 4) {
       if (xhr.status === 200) {
         const response = JSON.parse(xhr.responseText);
-        localStorage.setItem("authToken", response.key); // ✅ Store token
+        localStorage.setItem("authToken", response.key);
 
         result.innerText = "✅ Login successful!";
         setTimeout(() => {
-          window.location.href = "shop.html"; // ✅ Redirect
+          window.location.href = "shop.html";
         }, 1000);
       } else {
         try {
