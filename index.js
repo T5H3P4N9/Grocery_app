@@ -7,7 +7,7 @@ document.addEventListener("DOMContentLoaded", function () {
 });
 
 // ✅ Live backend base URL
-const BASE_URL = "https://grocery-back-end.onrender.com/dj-rest-auth";
+const BASE_URL = "https://grocery-back-end.onrender.com/api/auth";
 
 // Signup Function
 function signupUser() {
